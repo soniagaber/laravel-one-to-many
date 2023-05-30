@@ -2,7 +2,7 @@
 
 @section('content')
 
-<table class="mt-5 table table-striped">
+<table class="mt-5 table table-striped mb-3">
     <thead>
         <th>Titolo</th>
         <th>Descrizione</th>
@@ -26,4 +26,8 @@
         @endforeach
     </tbody>
 </table>
+
+<div class="d-flex justify-content-around">
+    <a href="{{route('admin.projects.create')}}" class="btn btn-primary">Aggiungi un Progetto</a>
+</div>
 @endsection

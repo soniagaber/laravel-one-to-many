@@ -1,1 +1,16 @@
-@import '~bootstrap/scss/bootstrap'
+@import '~bootstrap/scss/bootstrap';
+
+#admin-layout{
+    display: flex;
+}
+
+aside{
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+    gap: 2em;
+    min-width: 180px;
+    padding: 15px;
+}
+
+main{flex-grow: 1;}

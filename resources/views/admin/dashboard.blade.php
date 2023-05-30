@@ -1,7 +1,7 @@
 @extends('layouts/admin')
 
 @section('content')
-    <h1>Pgina di Amministrazione</h1>
+    <h1>Pagina di Amministrazione</h1>
     <hr>
     <ul>
         <li>

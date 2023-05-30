@@ -88,6 +88,23 @@
             </div>
         </nav>
 
+        <div id="admin-layout">
+            <aside id="admin-sidebar">
+                <div class="card">
+                    <div class="card-header">Dashboard</div>
+                    <div class="list-group list-group-flash">
+                        <a href="{{route('admin.home')}}" class="list-group-item list-group-item-action">Home</a>
+                    </div>
+                </div>
+
+                <div class="card {{str_contains(Route::currentRouteName(), 'projects.')? 'border-primary' : ''}}">
+                    <div class="card-header">Progetti</div>
+                    <div class="list-group list-group-flash">
+                        <a href="{{route('admin.projects.index')}}" class="list-group-item list-group-item-action">Tutti i Progetti</a>
+                    </div>
+                </div>
+            </aside>
+
         <main class="container">
             @yield('content')
         </main>

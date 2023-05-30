@@ -5,6 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
+use Illuminate\Support\Str;
+
+use Symfony\Component\ErrorHandler\Debug;
 
 class ProjectController extends Controller
 {
@@ -26,7 +31,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
@@ -37,7 +42,13 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $formData=$request->all();
+        $this->validation($formData);
+        $project=new Project();
+        $project->fill($formData);
+        $project->slug= Str::slug($project->title, '-');
+        $project->save();
+        return redirect()->route('admin.projects.show', $project);
     }
 
     /**
@@ -83,5 +94,17 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         //
+    }
+
+    private function validation($formData){
+        $validator=Validator::make($formData, [
+            'title' =>'required|max:250|min:2',
+            'description' =>'required'
+        ],[
+            'title.max' =>'Il titolo deve avere al massimo :max caratteri',
+            'title.required' => 'Il progetto deve avere un titolo',
+            'title.min' =>'Il titolo deve avere minimo :min caratteri',
+            'description.required' => 'Il progetto deve avere un contenuto',
+        ])->validate();
     }
 }
