@@ -101,6 +101,7 @@
                     <div class="card-header">Progetti</div>
                     <div class="list-group list-group-flash">
                         <a href="{{route('admin.projects.index')}}" class="list-group-item list-group-item-action">Tutti i Progetti</a>
+                        <a href="{{route('admin.projects.create')}}" class="list-group-item list-group-item-action">Aggiungi un Progetto</a>
                     </div>
                 </div>
             </aside>

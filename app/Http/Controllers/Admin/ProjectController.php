@@ -70,7 +70,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact ('project'));
     }
 
     /**
@@ -82,7 +82,15 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $formData =$request->all();
+
+        $this->validation($formData);
+
+        $formData['slug'] = Str::slug($formData['title'], '-');
+
+        $project->update($formData);
+
+        return redirect()->route('admin.projects.show', $project);
     }
 
     /**
@@ -93,18 +101,26 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+        return redirect()->route('admin.projects.index');
     }
 
     private function validation($formData){
         $validator=Validator::make($formData, [
             'title' =>'required|max:250|min:2',
-            'description' =>'required'
+            'description' =>'required',
+            'github_link' => 'required',
+            'language' => 'required|max:50',
+            'creation_date' => 'required',
         ],[
             'title.max' =>'Il titolo deve avere al massimo :max caratteri',
             'title.required' => 'Il progetto deve avere un titolo',
             'title.min' =>'Il titolo deve avere minimo :min caratteri',
             'description.required' => 'Il progetto deve avere un contenuto',
+            'github_link.required' => 'Devi inserire un link',
+            'language.required' => 'Devi inserire un linguaggio',
+            'language.max' => 'Il campo contiene al massimo :max caratteri',
+            'creation_date.required' => 'Inserisci la data di creazione',
         ])->validate();
     }
 }
