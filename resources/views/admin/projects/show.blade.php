@@ -3,7 +3,7 @@
 @section('content')
 
     <h1>{{$project->title}}</h1>
-    <h2>Categoria:</h2>
+    <h2>Categoria:{{$project->type ? $project->type->name : ' Nessuna'}}</h2>
     <p>{{$project->description}}</p>
 
     <div class="container">
