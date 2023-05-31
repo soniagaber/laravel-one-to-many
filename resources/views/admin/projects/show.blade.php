@@ -1,7 +1,9 @@
 @extends('layouts/admin')
 
 @section('content')
+
     <h1>{{$project->title}}</h1>
+    <h2>Categoria:</h2>
     <p>{{$project->description}}</p>
 
     <div class="container">
